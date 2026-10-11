@@ -1,7 +1,10 @@
 [core]
-    remote = myremote
+    remote = storage
     analytics = false
 ['remote "myremote"']
     url = s3://first-demo-baig
     profile = dvc
     region = eu-north-1
+['remote "storage"']
+    url = s3://baig-policy-new/dvc
+    region = us-east-1
