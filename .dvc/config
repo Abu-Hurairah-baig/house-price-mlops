@@ -3,5 +3,4 @@
     analytics = false
 ['remote "storage"']
     url = s3://first-demo-baig/dvc
-    profile = dvc
     region = eu-north-1
