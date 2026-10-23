@@ -79,7 +79,11 @@ with mlflow.start_run():
     mlflow.log_param("test_size", test_size)
     mlflow.log_param("rows_in_dataset", len(data))
     mlflow.log_metric("mae", mae)
+     # Save the score to a file so the CI quality gate can read it 
 
+    with open("metrics.json", "w") as f: 
+
+        json.dump({"mae": mae}, f) 
     # Save the score to a file so the CI quality gate can read it
     with open("metrics.json", "w") as f:
         json.dump({"mae": mae}, f)
