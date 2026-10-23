@@ -2,6 +2,7 @@
 # Usage: python train.py [linear|tree|forest]   (default is linear)
 
 import sys
+import json
 import pandas as pd
 import joblib
 import mlflow
@@ -79,11 +80,15 @@ with mlflow.start_run():
     mlflow.log_param("rows_in_dataset", len(data))
     mlflow.log_metric("mae", mae)
 
+    # Save the score to a file so the CI quality gate can read it
+    with open("metrics.json", "w") as f:
+        json.dump({"mae": mae}, f)
+
     # Step 9: Log the trained model to MLflow and register it by name
     mlflow.sklearn.log_model(
         model,
         name="model",
-        registered_model_name="house-pricemodel",
+        registered_model_name="house-price-model",
         skops_trusted_types=["sklearn.tree._tree.Tree"],
     )
 
